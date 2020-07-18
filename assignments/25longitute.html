@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+
+            <!-- https://unpkg.com/axios@0.19.0/dist/axios.js -->
+            <script src="./js/axios.js"></script>
+            
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+                  
+            class GetLocation extends React.Component {
+            constructor(props){
+                super(props)
+                this.state = {
+                    latitude: '',
+                    longitude: '',
+                    temprature:''
+                    }
+            }
+
+            handleLocation=()=>{
+                if(navigator.geolocation){
+                    navigator.geolocation.getCurrentPosition((position)=>{
+
+                        this.setState({latitude:position.coords.latitude,
+                        longitude:position.coords.longitude})
+                    })
+
+                      {
+                    axios.get(`http://api.openweathermap.org/data/2.5/weather/${this.state.latitude},${this.state.longitude}`)
+                    .then((response)=>{
+                        const temprature = (response.data.currently.temprature)
+                        console.log(temptature)
+                        this.setState({temprature})
+                    })
+                    .catch((err)=>{
+                        console.log(err)
+                    })
+                }
+                
+                }else{
+                    alert('your browser is not supported lattitude')
+                }
+
+              
+            }
+            render(){
+                    return(
+                        <div>
+                            
+                            {
+                                this.state.latitude || this.state.longitude ? (
+                                    <div>
+                                    <h2>You Are Here </h2>
+                                    <h3>latitude: {this.state.latitude}</h3>
+                                    <h3>longitude: {this.state.longitude}</h3>
+                                    <h3>temprature: {this.state.temprature}</h3>
+                                    </div>
+                                ):''}
+
+                                <button onClick={this.handleLocation}> Show Your Location</button>
+                        </div>
+                    )
+                }       
+               
+            }
+            
+            ReactDOM.render(<GetLocation />,rootHandle)
+            </script>
+        </body>
+    </head>
+</html>

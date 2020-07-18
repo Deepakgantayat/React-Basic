@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+            //function component
+            //presentation purpode
+            //-function name must be in caps
+            // -parameter name is props and by default be an object
+            //must return jsx
+            function Hotel(props){
+                return (
+                    <div> 
+                        <h2> Name - {props.name }</h2>
+                        <p> cuisines- {props.cuisines.join(', ')} </p>
+                        <p> cost of two - {props.cost} </p>
+                        <p> rating - {props.cost} </p>
+                        </div>
+                )
+            }
+            const ele = (
+            
+                <div>
+                    <hotel name = "Mtr" cuisines = {['south insian', 'north indian', 'chinese']} rating= "4.1" cost = "200" />
+                </div>    
+            )                   
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

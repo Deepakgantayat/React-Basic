@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+
+            <!-- https://unpkg.com/axios@0.19.0/dist/axios.js -->
+            <script src="./js/axios.js"></script>
+            
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            class CartList extends React.Component{
+                constructor(){
+                    super()
+                    this.state = {
+                        products:[
+                        {id:1,name:"marker",price:10,quantity:1},
+                        {id:2,name:"scale",price:3,quantity:1},
+                        {id:3,name:"pen",price:5,quantity:1}
+                    ]
+                    }
+                }
+            
+
+            handleRemove=(id)=>{
+                this.setState((prevState)=>{
+                    return {
+                        products:prevState.products.filter(product=> product.id!=id)
+                    }
+                })
+            }
+            calcTotal=()=>{
+                let total= 0
+                this.state.products.forEach(product => {
+                    total+=product.price*product.quantity
+                })
+                return total
+
+            }
+            render(){
+                return(
+                    <div>
+
+                    <h3> My cart - ({this.state.products.length})</h3>
+
+                    {
+                        this.state.products.map(product=>{
+                            return <CartItem 
+                                        key ={product.id}
+                                        id={product.id}
+                                        name={product.name}
+                                        price={product.price}
+                                        handleRemove={this.handleRemove}
+                                    />
+
+                        })
+                    }
+                    <PriceDetail items={this.state.products.length} 
+                                    total={this.calcTotal()}
+                                    delivery={100}/>
+                    </div>
+                )
+            }
+        }
+            
+
+        class CartItem extends React.Component {
+                
+                render() {
+                    return (
+                        <div>
+                        <h2> {this.props.name}</h2>
+                        <p>INR {this.props.price}</p>
+                        <button onClick={()=>{
+                            const confirmRemove= window.confirm("Are you sure?")
+                            if(confirmRemove){
+                            this.props.handleRemove(this.props.id)
+                            }
+                        }}> Remove</button>
+                        <hr/>
+                        </div>
+                    )
+                }
+            }
+            function PriceDetail(props) {
+                return(
+                    <div>
+                    <p>Price Items-{props.items} - total -{props.total}</p>
+                    <p>Delivery -{props.delivery}</p>
+                    <b>total payble -{props.total + props.delivery}</b>
+                    </div>
+                )
+            }
+        
+
+            ReactDOM.render(<CartList />,rootHandle)
+
+            
+            </script>
+        </body>
+    </head>
+</html>

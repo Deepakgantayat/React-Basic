@@ -1,0 +1,114 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Add Product Form</title>
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <script src="./js/react.development.js"></script>
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+            class Product extends React.Component{
+                constructor(){
+                    super()
+                    this.state={
+                        products:[],
+                            id:'',
+                            name:'',
+                            price:'',
+                            description:''
+                    }
+                }
+                handleIdChange=(e)=>{
+                    const id=e.target.value
+                    this.setState({id})
+                }
+                handleNameChange=(e)=>{
+                    const name=e.target.value
+                    this.setState({name})
+                }
+                handlePriceChange=(e)=>{
+                    const price=e.target.value
+                    this.setState({price})
+                }
+                handleDescChange=(e)=>{
+                    const description=e.target.value
+                    this.setState({description})
+                }
+                handleSubmit=(e)=>{
+                    e.preventDefault()
+                    const formData={
+                        id:this.state.id,
+                        name:this.state.name,
+                        price:this.state.price,
+                        description:this.state.description
+                    }
+                    this.setState((prevState)=>{
+                        return{
+                            products:prevState.products.concat(formData),
+                            id:'',
+                            name:'',
+                            price:'',
+                            description:''
+                        }
+                    })
+                }
+
+                render()
+                {
+                    let st={align:'center'}
+                    return(
+                        <div style={st}>
+                        <h2>Listing Product--Qty--{this.state.products.length}</h2>
+                        <table border="1">
+                        <thead>
+                        <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            this.state.products.map((prod,index)=>{
+                                return(
+                                    <tr key={index}>
+                                    <td>{prod.id}</td>
+                                    <td>{prod.name}</td>
+                                    <td>{prod.price}</td>
+                                    <td>{prod.description}</td>
+                                    </tr>
+                                )
+                                
+                            })
+                        }
+                        </tbody>
+                        </table>
+                        <form onSubmit={this.handleSubmit}>
+                        <h2>Add Product</h2>
+                        <label>ID:
+                            <input type="text" value={this.state.id} onChange={this.handleIdChange} required/></label><br /><br />
+                        <label>NAME:
+                            <input type="text" value={this.state.name} onChange={this.handleNameChange} required/></label><br /><br />
+                        <label>PRICE:
+                            <input type="text" value={this.state.price} onChange={this.handlePriceChange} required/></label><br /><br />
+                        <label>DESCRIPTION:
+                            <input type="text" value={this.state.description} onChange={this.handleDescChange} required/></label><br /><br />
+                        <input type="submit" />
+                        </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Product />,rootHandle)
+        
+        </script>
+    </body>
+    </html>

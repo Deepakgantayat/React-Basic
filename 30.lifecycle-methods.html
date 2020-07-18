@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            class Users extends React.Component{
+                constructor(){
+                    super()
+                    this.state={
+                        text:"users",
+                        users:[],
+                        click:0
+                    }
+                }
+
+                //depricated 
+                //componentWillMount(){
+                //     console.log("component will mount")
+                // }
+
+                handleClick =()=>{
+                    console.log("handle CLick")
+                    this.setState ((prevState)=>{
+                        return {
+                            click:prevState.click+1
+                        }
+                    })
+
+                }
+
+                //only after first render
+                componentDidMount() {           
+                console.log('component did mount')     
+                // const xhr = new XMLHttpRequest() 
+                // xhr.open('GET', 'http://jsonplaceholder.typicode.com/users')
+                // xhr.send()
+                // xhr.onload = () => {
+                //     const users = JSON.parse(xhr.responseText)
+                //     this.setState({ users })
+                // }
+                fetch('http://jsonplaceholder.typicode.com/users')
+                .then((response)=>{
+                    return response.json()
+                })
+                .then((users)=>{
+                    this.setState({users})
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+            }
+
+                render(){
+                    console.log('render',this.state)
+                    return(
+                        <div>
+                        <h2>{this.state.text}</h2>
+                        <button onClick={this.handleClick}>click</button>
+
+                        <h2>Listing users - {this.state.users.length}</h2>
+                        <ul>
+                            {this.state.users.map(function(user){
+                                return <li key={user.id}>{user.name}</li>
+                            })}
+                        </ul>
+                        </div>
+                    )
+                }
+               
+                
+            }
+
+            ReactDOM.render(<Users />,rootHandle)
+            </script>
+        </body>
+    </head>
+</html>

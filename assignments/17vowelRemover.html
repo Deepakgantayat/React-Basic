@@ -1,0 +1,49 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Vowel remover</title>
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <script src="./js/react.development.js"></script>
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+
+            class Capital extends React.Component{
+                constructor(){
+                    super()
+                    this.state={
+                        text:'',
+                        result:''
+                    }
+                }
+                handleTextCange=(e)=>{
+                    const text=e.target.value
+                    const result=text.split('').filter(char=>!'aeiouAEIOU'.includes(char)).join('')
+                    this.setState({text,result})
+                }
+
+                render(){
+                    return(
+                        <div>
+                        <h2>Vowel Remover</h2>
+                        <p>{this.state.result}</p>
+                        <form>
+                        <textarea value={this.state.text} onChange={this.handleTextCange} 
+                        style={{width:'500px',height:'200px'}}></textarea>
+                        </form>
+                        </div>
+                    )
+                }
+            }
+        ReactDOM.render(<Capital />,rootHandle)
+        
+        </script>
+    </body>
+    </html>

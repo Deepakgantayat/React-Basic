@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+            <title></title>    
+            <link href= "./css/bootstrap.css" rel = "stylesheet">
+    </head>
+    <body>
+        <div id = "root">
+         
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script src="./js/axios.js"></script>
+
+        <script type = "text/babel">
+
+const rootHandle = document.getElementById('root')
+
+function Spinner(props){
+    return(
+        <div className="spinner-grow"></div>
+    )
+}
+function UserList(props) {
+    return (
+        <ul className={props.classes}>
+            {props.users.map(function (user) {
+                return <li key={user.id} className="list-group-item"> {user.name} </li>
+            })}
+        </ul>
+    )
+}
+
+
+class Users extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            users: [],
+            isLoading: true
+        }
+    }
+    // only after the first render
+    componentDidMount() {
+        setTimeout( ()=> {
+            axios.get('http://jsonplaceholder.typicode.com/users')
+            .then((response) => {
+                const users = response.data
+                this.setState({ users, isLoading:false })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        })
+    }
+
+    render() {
+        return (
+            <div className="row">
+                <div className="col-md-6 offset-md-3">
+                    {
+                        this.state.isLoading ? (
+                        <Spinner/>
+                        ):(
+                            <div>
+                            <h2> Listing Users - {this.state.users.length} </h2>
+                            <UserList users={this.state.users} classes="list-group"/>
+                                </div>
+                        )
+                    }
+                    
+                </div>
+                              
+            </div>
+        )
+    }
+}
+
+function App(props) {
+    return (
+        <div className="container"> 
+            <Users />
+        </div> 
+    )
+}
+
+ReactDOM.render(<App />, rootHandle)
+           
+         
+        </script>
+    </body>
+</html>

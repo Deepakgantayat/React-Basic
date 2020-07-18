@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+
+            <!-- https://unpkg.com/axios@0.19.0/dist/axios.js -->
+            <script src="./js/axios.js"></script>
+            
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+                  
+            class Autofill extends React.Component {
+            constructor(props){
+                super(props)
+                this.state= {
+                    username: '',
+                    name: '',
+                    email: '',
+                    customers :[]
+                }
+            }
+            componentDidMoun(){
+            axios.get('https://jsonplaceholder.typicode.com/users')
+                .then((response)=>{
+                    const customers = rsponse.data
+                    this.setState = ({customers})
+                    console.log(customers)
+                })
+        }
+        handleChange=(e) =>{
+            this.setState({
+            [e.target.name] : e.target.value
+         })
+        }
+        handleSubmit = (e) => {
+            e.preventDefault()
+            const formData={
+                username: this.state.username,
+                name: this.state.name,
+                email: this.state.email
+            }
+        }
+       
+            render(){
+                    return(
+                        <div>
+                            <form onSubmit = {this.handleSubmit}>
+                            <label> Username
+                            <input type = "text" value = {this.state.username} onChange ={this.handleChange} name = 'username' />
+                            </label>
+                            <br/>
+                            <br/>
+                            <label> Name
+                            <input type = "text" value = {this.state.name} onChange ={this.handleChange} name = 'name'/>
+                            </label>
+                            <br/>
+                            <br/>
+                            <label> Email
+                            <input type = "text" value = {this.state.email} onChange = {this.handleChange} name ='email'/>
+                            </label>
+                            <br/>
+                            <br/>                            
+                            <input type = "submit"/>
+                            </form>
+            
+                        </div>
+                    )
+                }       
+               
+            }
+            
+            ReactDOM.render(<Autofill />,rootHandle)
+            </script>
+        </body>
+    </head>
+</html>

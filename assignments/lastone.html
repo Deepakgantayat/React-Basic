@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>template file</title>
+    </head>
+    <body>
+        <div id="root">
+        </div>
+		<script  src="./js/react.development.js"></script>
+        <script  src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+        <script src =",/js/axios.js"></script>
+        <script type="text/babel">
+
+
+            const rootHandle = document.getElementById('root')
+            class SelectUser extends React.Component{
+                constructor(){
+                    super()
+                    this.state = {
+                        users: ['hema', 'rekha', 'jaya', 'susma']
+                    }
+                }
+                handleClick=(e)=> {
+                   e.preventDefault
+                }
+
+                render(){
+                    
+                    return(
+                        <div>
+                        <h2> Select user</h2>
+                        <ul>
+                            {
+                                this.state.users.map((user, index) => {
+                                    return <li key= {index}>{user}</li>
+                                })
+                            }
+                            
+                            </ul>
+                            <button onClick={this.handleClick}> choose user </button>
+                           
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<SelectUser/>, rootHandle)
+            
+        </script>
+    </body>
+</html>

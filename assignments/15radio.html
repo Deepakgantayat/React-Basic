@@ -1,0 +1,112 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Radio Event handel</title>
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <script src="./js/react.development.js"></script>
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+
+            class UserDetails extends React.Component{
+                constructor(){
+                    super()
+                    this.state={
+                        users:[
+                            {id:1,name:'saikat',email:'sunny2207@icloud.com'},
+                            {id:2,name:'Abhra',email:'abhra@gmail.com'},
+                            {id:3,name:'indrajit',email:'indrajit@icloud.com'},
+                            {id:4,name:'Sayantini',email:'sayantini@gmail.com'},
+                            {id:5,name:'Pratistha',email:'pratistha@gmail.com'}
+                        ],
+                        isSelected:'list'
+                    }
+                }
+
+                handleChange=(e)=>{
+                    const isSelected=e.target.value
+                    this.setState({isSelected})
+                }
+                handleRadioButtonChange=(e)=>{
+                    const isSelected=e.target.value
+                    this.setState({isSelected})
+                }
+
+                render(){
+                    return(
+                        <div>
+                        <h2>Select Option</h2>
+                        <form onChange={this.handleRadioButtonChange}>
+                        <label>
+                        <input type="radio" value="list" 
+                        checked={this.state.isSelected === "list"}
+                        onChange={this.handleChange} />
+                        List</label>
+                        <label>
+                        <input type="radio" value="table" 
+                        checked={this.state.isSelected === "table"}
+                        onChange={this.handleChange} />
+                        Table</label>
+                        </form>
+                        {
+                            (()=>{
+                                if(this.state.isSelected=='table'){
+                                    return(
+                                        <table border="1">
+                            <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                this.state.users.map((user)=>{
+                                    return(
+                                        <tr key={user.id}>
+                                        <td>{user.id}</td>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            </tbody>
+                            </table>
+
+                                    )
+                                }
+                                else{
+                                    return(
+                                        <ul>
+                                        {
+                                            this.state.users.map((user)=>{
+                                                return(
+                                                    <li key={user.id}>{user.id}---{user.name}---{user.email}</li>
+                                                )
+                                            })
+                                        }
+                                        </ul>
+                                    )
+                                }
+                            
+
+                            })()  
+                        }
+                       
+                        </div>
+                    )
+                }
+            }
+        ReactDOM.render(<UserDetails />,rootHandle)
+        </script>
+    </body>
+    </html>

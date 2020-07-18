@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+            <title></title>    
+            <link href= "./css/bootstrap.css" rel = "stylesheet">
+    </head>
+    <body>
+        <div id = "root">
+         
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script src="./js/axios.js"></script>
+
+        <script type = "text/babel">
+
+const rootHandle = document.getElementById('root')
+
+function UserList(props) {
+    return (
+        <ul className={props.classes}>
+            {props.users.map(function (user) {
+                return <li key={user.id} className="list-group-item"> {user.name} </li>
+            })}
+        </ul>
+    )
+}
+
+
+class Users extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            users: [],
+        }
+    }
+    // only after the first render
+    componentDidMount() {
+        axios.get('http://jsonplaceholder.typicode.com/users')
+            .then((response) => {
+                const users = response.data
+                this.setState({ users })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    render() {
+        return (
+            <div className="row">
+                <div className="col-md-6">
+                    <h2> Listing Users - {this.state.users.length} </h2>
+                    <UserList users={this.state.users} classes="list-group"/>
+                </div>
+                <div className="col-md-6">
+                    <h2> Listing Users - {this.state.users.length} </h2>
+                    <UserList users={this.state.users} classes="list-group list-group-flush" />
+                </div>
+               
+            </div>
+        )
+    }
+}
+
+function App(props) {
+    return (
+        <div class="container"> 
+            <Users />
+        </div> 
+    )
+}
+
+ReactDOM.render(<App />, rootHandle)
+           
+         
+        </script>
+    </body>
+</html>

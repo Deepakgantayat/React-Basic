@@ -1,0 +1,56 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Listing Elements of Array of Object using MAP()</title>
+
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <script src="./js/react.development.js"></script>
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+            const links=[
+                {id:1,name:'facebook',url:'http://www.facebook.com'},
+                {id:2,name:'gmail',url:'http://www.gmail.com'},
+                {id:3,name:'youtube',url:'http://www.youtube.com'}
+                ]
+            const ele=(
+                <div>
+                <h2><u>Listing links | No of Qty-{links.length}</u></h2>
+                    <table border="1">
+                    <thead>
+                    <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>URL</th>
+                    <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                   {
+                       links.map(function (e,index) {
+                           return (
+                               <tr key={e.id}>
+                               <td>{e.id}</td>
+                               <td><a href={e.url}>{e.name}</a></td>
+                               <td>{e.url}</td>
+                               <td><a href={e.url}>Visit</a></td>
+                               </tr>                         )
+                           
+                       })
+                   }
+                   </tbody>
+                   </table>
+                       
+                </div>
+            )
+            ReactDOM.render(ele,rootHandle)
+        </script>
+    </body>
+    </html>

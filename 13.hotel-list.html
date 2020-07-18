@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            //function component
+            // only for the presentation purpose like want to show same thing muliple times react gives components
+            // rules- must be in caps 
+            // parameter name will be lways props, by defaultbe an object
+            // and must return jsx
+            // 
+                const hotels = [
+                    {id:1,name:"MTR",rating:4.2,cuisines:['si','ni','ch']},
+                    {id:1,name:"Vidyarthi vabhan",rating:5.0,cuisines:['si','ni','ch']}
+                ]
+            function Hotel(props){
+                return (
+                    <div>
+                        <h1> Name- {props.name}</h1>
+                        <h2> cuisines- {props.cuisines}</h2>
+                        <h3> rating- {props.rating}</h3>
+                        <hr/>
+                    </div>
+                )
+            }
+
+            const ele = (
+                <div>
+                    <h1>LISTING ELEMENTS {hotels.length}</h1>
+                    <br/>
+                    
+                    {
+                        hotels.map(function(hotel){
+                            return <Hotel key = {hotel.id} name= {hotel.name} rating={hotel.rating} cuisines={hotel.cuisines}/>
+                        })
+                    }
+                </div>
+            )
+
+            ReactDOM.render(ele,rootHandle)
+            </script>
+        </body>
+    </head>
+</html>

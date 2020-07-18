@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Life Cycle methods</title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        const rootHandle = document.getElementById('root')
+
+        class Users extends React.Component {
+            constructor() {
+                console.log('constructor')
+                super()
+                this.state = {
+                    users: []
+                }
+            }
+
+            // only after the first render
+            componentDidMount() {           
+                console.log('component did mount')     
+                const xhr = new XMLHttpRequest() 
+                xhr.open('GET', 'http://jsonplaceholder.typicode.com/users')
+                xhr.send()
+                xhr.onload = () => {
+                    const users = JSON.parse(xhr.responseText)
+                    this.setState({ users })
+                }
+            }
+
+            render() {
+                console.log('render', this.state)
+                return (
+                    <div>
+                     
+
+                        <h2> Listing Users - { this.state.users.length } </h2>
+                        <ul>
+                            { this.state.users.map(function(user){
+                                return <li key={user.id}> { user.name } </li>
+                            })}
+                        </ul>
+                    </div> 
+                )
+            }
+        }
+
+        ReactDOM.render(<Users />, rootHandle)
+    </script>
+</body>
+
+</html>

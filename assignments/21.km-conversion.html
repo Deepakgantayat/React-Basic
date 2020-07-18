@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+
+            <!-- https://unpkg.com/axios@0.19.0/dist/axios.js -->
+            <script src="./js/axios.js"></script>
+            
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            class Kilometer extends React.Component{
+               constructor(){
+                   super()
+                   this.state = {
+                        kilometer: 0,
+                        miles:0
+                        
+                   }
+               }
+               handleChange=(e)=>{
+                   console.log(e.target.value)
+                    this.setState({kilometer:e.target.value})
+               }
+               
+                render(){
+                    return(
+                    <div>
+                        <h1>miles -{(this.state.kilometer * 1.6).toFixed(2)}</h1>
+
+                        <h3>kilometer- {this.state.kilometer}</h3>
+                        <div>
+                            <input type="range" min="0" max="100" value={this.state.kilometer} onChange={this.handleChange} />
+                        </div>
+                    </div>
+                    )
+                }
+            }
+
+            ReactDOM.render(< Kilometer/>, rootHandle)
+        
+        
+
+
+            </script>
+        </body>
+    </head>
+</html>

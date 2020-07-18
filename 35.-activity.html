@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Activity</title>
+    </head>
+    <body>
+        <div id="root">
+        </div>
+		<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+        <script src ="./js/axios.js"></script>
+        <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+            class Users extends React.Component{
+                constructor(){
+                    super()
+                    this.state = {
+                        user:{},
+                        id:''
+                    }
+                    this.handleSubmit = this.handleSubmit.bind(this)
+                }
+                handleIdChange = (e) => {
+                    const id = e.target.value
+                    this.setState({ id })
+                }
+                handleSubmit(e){
+                    e.preventDefault()
+                    const id= this.state.id
+                    axios.get(`https://jsonplaceholder.typicode.com/users/${this.state.id}`)
+                    .then((response) => {
+                        const user = response.data
+                        this.setState({user})
+                    })
+                    .catch((err) => {
+                        window.alert('invlid alert')
+                        console.log(err)
+                    })
+                }
+
+
+                render(){
+                    return(
+                         <div>
+                              <h1> Get User Info</h1> 
+
+                              <form onSubmit={this.handleSubmit}>
+                                    <label>
+                                        <input type="text" value={this.state.id} onChange={this.handleIdChange} />
+                                        <input type="submit" />
+                                     </label>
+                                <h1>User Details</h1>
+                                <p>{this.state.user.name} - - {this.state.user.email}</p>
+                              </form>
+                         </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Users />, rootHandle)
+        </script>
+    </body>
+</html>

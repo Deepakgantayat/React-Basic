@@ -1,0 +1,68 @@
+!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+            <!-- https://unpkg.com/axios@0.19.0/dist/axios.js -->
+            <script src="./js/axios.js"></script>
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            class Users extends React.Component{
+                constructor(){
+                    super()
+                    this.state={
+                       user:{}                //look into the given object state and set the state  
+                     }
+                }
+
+                //only after first render
+                componentDidMount() {           
+                console.log('component did mount')     
+                
+                //es6 to interact with backend
+                //es6 promises -important
+                
+                axios.get("http://jsonplaceholder.typicode.com/users/1")
+                .then((response)=>{
+                    const user = response.data
+                    this.setState({user})
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+
+                }
+
+                render(){
+                    console.log('render',this.state)
+                    return(
+                        <div>
+                        
+
+                        <h2>user info</h2>
+                            <p>{this.state.user.username} - {this.state.user.email} -{this.state.user.name} - {this.state.user.website}</p>
+                        </div>
+                    )
+                }
+               
+                
+            }
+
+            ReactDOM.render(<Users />,rootHandle)
+            </script>
+        </body>
+    </head>
+</html>

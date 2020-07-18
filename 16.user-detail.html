@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+            const allUsers = [{id: 1, name: 'deepak', age: 24},
+                                {id:2, name:'kitu', age:24}]
+           
+            function UserDetail(props){
+                return (
+                    <div> 
+                        <h2> Listing Users-{props.users.length}</h2>
+                        <ul>
+                            {
+                                props.users.map(function(user){
+                                    return <li key = {user.id}>{user.name}</li>
+                                    
+                                })
+                            }
+                            </ul>
+                        </div>
+                )
+                    }              
+                ReactDOM.render(<UserDetail users={allUsers}text="List"/>, rootHandle)
+        </script>
+    </body>
+</html>

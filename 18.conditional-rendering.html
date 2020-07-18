@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+           
+            function Article(props){
+                console.log(props)
+                return (
+                    <div> 
+                        <h2>title-{props.title} - <small> {props.author ? props.author : 'anonymous'}</small></h2>
+                        <p> body - {props.body}</p>
+                       {/* {props.publishDate && <p>publish date- {props.publishDate} </p>} */}
+                        <p> publish date - {props.publishDate ? props.publishDate : 'NA'} </p>
+                        </div>
+                )
+            }
+            function App(){
+                return (
+                    <div>
+                        <Article title = "js is awesome"
+                        body = "js, reacct, node, express"
+                        publishDate = "01/11/2011"
+                        author= "Raghav"
+                        />
+                        <Article title = "javascript fundamentals"
+                        body = "full stack language"
+                        publishDate = ""
+                        author= ""
+                        />
+                        </div>
+                )
+            }  
+                             
+                ReactDOM.render(<App />, rootHandle)
+        </script>
+    </body>
+</html>

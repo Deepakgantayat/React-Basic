@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            js-expression-inside-jsx+react
+        </title>    
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+
+            <!-- https://unpkg.com/axios@0.19.0/dist/axios.js -->
+            <script src="./js/axios.js"></script>
+            
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            class TextTyping extends React.Component{
+              constructor(){
+                super()
+                this.state={
+                  text:'',
+                  i:0
+                }
+              }
+              componentDidMount(){
+                this.handleTyping()
+              }
+
+              handleTyping=()=>{
+                const str = "this is the text."
+                const text = this.state.text+str[this.state.i]
+                console.log(text)
+                this.setState({text})
+                this.state.i++
+                setTimeout( ()=>{
+                  if(str[this.state.i]){
+                    this.handleTyping()                      
+                  }
+                },200)
+              }
+             
+            
+            render(){
+              return(
+                <div>
+                <h1>{this.state.text}</h1>
+                </div>
+              )
+           }
+
+            }
+          
+
+          ReactDOM.render(<TextTyping />,rootHandle)
+          
+            
+            </script>
+        </body>
+    </head>
+</html>

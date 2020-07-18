@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+            class Person extends React.Component{
+                constructor(){
+                    super()
+                    this.state = {
+                       count: 0,
+                       name: 'Dct'
+                    }
+                    this.handleUp = this.handleUp.bind(this)
+                    this.handleStepUp = this.handleStepUp.bind(this)
+                }
+                //bind in constructor
+                handleUp(){                  
+                    this.setState(function(prevState){
+                        return {
+                            count: prevState.count + 1
+                        }
+                    })
+                }
+                //es6 arrow function
+                handleDown = () => {
+                    this.setState((prevState) => {
+                        return {
+                            count: prevState.count - 1
+                        }
+                    })
+                }
+                //bind at the time of calling the method - not popular
+                handleReset(){
+                this.setState({count: 0})
+                }
+                handleStepUp(prevState){
+                    this.setState(function(prevState){
+                        return {
+                            count: prevState.count + 5
+                        }
+                    })
+                }
+                render(){
+                    return(
+                        <div>
+                           <h2>Count - {this.state.count}</h2>
+                           <button onClick={this.handleUp}> up </button>
+                           <button onClick={this.handleDown}> Down </button>
+                           <button onClick={this.handleReset.bind(this)}> reset </button>
+                           <button onClick={this.handleStepUp}> step up 5 </button>
+                           </div>
+                    )
+                }
+            }
+                             
+            ReactDOM.render(<Person/>, rootHandle)
+        </script>
+    </body>
+</html>

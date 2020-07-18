@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script>
+            const rootHandle = document.getElementById('root')
+            const fruits = ['mango', 'banana']
+
+            const ele = React.createElement('ul', {},
+                            React.createElement('li', {}, fruits[0]),
+                            React.createElement('li', {}, fruits[1])
+            )
+
+            ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Task</title>
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <script src="./js/react.development.js"></script>
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+            class  Task extends React.Component{
+                constructor(){
+                    super()
+                    this.state={
+                        values:[
+                            {id:1,title:'task1',completed:true},
+                            {id:2,title:'task2',completed:false},
+                            {id:3,title:'task3',completed:true}
+                        ]
+                    }
+                }
+                // listingnum=()=>{
+                //     var val=0
+                //     var val1=0
+                //     this.state.values.forEach((value)=>{
+                //         if(value.completed==true){
+                //            val=val+1
+                //         }
+                //         else{
+                //             val1+=1
+                //         }
+                //         return `${val}----${val1}`
+                //     })
+                // }
+                render(){
+                    return(
+                        <div>
+                        <h2>Listing Task-{this.state.values.length}</h2>
+                        {
+                            
+                            this.state.values.map((value)=>{
+                                let complete={color:'green'}
+                                let incomplete={color:'red'}
+                                    
+                                        if(value.completed==true){
+                                         return(
+                                             <p key={value.id} style={complete}><strike>{value.title}</strike></p>)
+                                        }
+                                        else{
+                                            return(<p key={value.id} style={incomplete}>{value.title}</p>)
+                                        }  
+                            })
+
+                            
+                        }
+                        </div>
+                    )
+                }
+            }
+        ReactDOM.render(<Task />,rootHandle)            
+        
+        </script>
+    </body>
+    </html>

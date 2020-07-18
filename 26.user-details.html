@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <title>          
+        </title>
+        <head></head>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+            class UsersDetail extends React.Component{
+                constructor(props){
+                    super(props)
+                    this.state = {
+                        users: [
+                            {id:1, name: 'arjun', email: 'arjun@gmail.com'},
+                            {id:2, name: 'mahi', email: 'mahi@gmail.com'},
+                            {id:3, name:'mjk', email:'mjk@gmail.com'}
+                        ]
+                    }
+                    this.handleRemove = this.handleRemove.bind(this)
+                }
+                handleRemove(id){
+                    // const users = this.state.users.filter(user => user.id != id)
+                    // this.setState({users})
+                    this.setState((prevState) =>{
+                        return {
+                            users: prevState.users.filter(user => user.id != id)
+                        }
+                    })
+                }
+                render(){
+                    return(
+                        <div>
+                        <h2>Listing Users - {this.state.users.length}</h2>
+                        <table border="3">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th> Name</th>
+                            <th> Email</th>
+                            <th> Action </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            this.state.users.map((user)=>{
+                                return(
+                                    <tr key={user.id}>
+                                        <td>{user.id}</td>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td>
+                                        <button onClick = {() => {
+                                            //passing argument to event handler
+                                            this.handleRemove(user.id)
+                                        }}> remove</button></td>
+                                        </tr>
+                                )
+                            })
+                        }
+                        </tbody>
+                        </table>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<UsersDetail/>, rootHandle)
+  
+            </script>
+        </body>
+</html>

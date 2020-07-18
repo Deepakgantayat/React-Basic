@@ -1,0 +1,49 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Word And CharacterCount</title>
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <script src="./js/react.development.js"></script>
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+            class Count extends React.Component{
+                constructor(){
+                    super()
+                    this.state={
+                        words:''
+                    }
+                }
+                handleTextchange=(e)=>{
+                    const words=e.target.value
+                    this.setState({words})
+                }
+
+                render(){
+                    let charLength=this.state.words?this.state.words.length:0
+                    let word=this.state.words.split(' ')
+                    let wordLength=word?word.length-1:0
+                    return(
+                        <div>
+                                
+                            <form>
+                                <label><textarea onChange={this.handleTextchange} 
+                                    value={this.state.words}>{this.state.words}</textarea></label>
+                                <p>You have Written {wordLength} words and {charLength} characters</p>
+                            </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Count />,rootHandle)
+        
+        </script>
+    </body>
+    </html>

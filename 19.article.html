@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+           
+            function Article(props){
+                console.log(props)
+                return (
+                    <div> 
+                        <h2>title-{props.title} - <small> {props.author ? props.author : 'anonymous'}</small></h2>
+                        <p> body - {props.body}</p>
+                        <p> publish date - {props.publishDate ? props.publishDate : 'NA'} </p>
+                        </div>
+                )
+            }
+            const articles= [
+                {id:1, title: 'js is awesome', body: 'js, react, node, express', publishdate: '01/11/2011', author: 'Raghav'},
+                {id:2, title: 'js', body: 'js fundamentals', publishdate: '', author: ''}
+            ]
+            function App(props){
+                return (
+                    <div>
+                       {
+                           props.articles.map(function(article){
+                               return(
+                                   <Article
+                                   key = {article.id}
+                                   title = {article.title}
+                                   body = {article.body}
+                                   publishDate = {article.publishDate}
+                                   author = {article.author}
+                                   />
+                               )
+                           })
+                       }
+                        </div>
+                )
+            }  
+                             
+                ReactDOM.render(<App articles = {articles} />, rootHandle)
+        </script>
+    </body>
+</html>

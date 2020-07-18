@@ -1,0 +1,64 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Template</title>
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <script src="./js/react.development.js"></script>
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+            class Copy extends React.Component{
+                constructor(){
+                    super()
+                    this.state={
+                        notes:[
+                            {id:0,title:'This is React'},
+                            {id:1,title:'This is Javascript'}
+                            ]
+                    }
+                }
+
+
+                handleCopy=(id)=>{
+                    console.log(id)
+                    this.setState((prevState)=>{
+                        return{
+                            notes:prevState.notes.concat(prevState.notes[id])
+                        }
+                        
+                    })
+                }
+                render(){
+                    return(
+                        <div>
+                        {
+                            this.state.notes.map((note,index)=>{
+                                return(
+                                    <div key={index}>
+                                    <h3 key={index}>{note.title}</h3>
+                                    <button  onClick={()=>{
+                                        this.handleCopy(note.id)
+                                    }}>Copy Object</button>
+                                    </div>
+                                    
+                                )
+                        })
+                        }
+                        </div>
+                    )
+                }
+            }
+                
+            
+            ReactDOM.render(<Copy />,rootHandle)
+        
+        </script>
+    </body>
+    </html>

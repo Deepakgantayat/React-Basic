@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <title>list-map</title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+            const fruits = ['apple', 'ango', 'jackfruit', 'water melon', 'banana', 'apple']
+            const ele = (
+                <div>
+                    <h2>listing fruits- {fruits.length}</h2>
+                    <ul>
+                        {
+                            fruits.map(function(ele, index){
+                                return <li key = {index}> {ele} </li>
+                            })
+                        }
+                    </ul>
+                </div>
+            )
+            ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            class Toggle extends React.Component {
+                constructor(){
+                    super()
+                        this.state={
+                            isOn:true
+                        }
+                        this.handleToogle = this.handleToogle.bind(this)
+                }
+
+                handleToogle(){
+                    
+                    this.setState((prevState)=>{
+                        return{
+                            isOn:!prevState.isOn
+                        }
+                    })
+                }
+                 
+                 
+                        render(){
+
+                            document.body.style.backgroundColor= this.state.isOn? 'white':'black'
+                            
+                            return(
+                                <div>
+                                
+                                <button onClick={this.handleToogle}> toogle </button>
+                                </div>
+                            )
+                        }                                  
+                
+                }
+             ReactDOM.render(<Toggle />, rootHandle)
+            </script>
+        </body>
+    </head>
+</html>

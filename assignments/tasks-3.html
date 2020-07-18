@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            tasks
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            class TasksStrike extends React.Component{
+                constructor(){
+                    super()
+                    this.state = {
+                        tasks:[
+                            {id:1,title:"task 1",completed:true},
+                            {id:2,title:"task 2",completed:false},
+                            {id:3,title:"task 3",completed:true},
+                            {id:4,title:"task 4",completed:false},
+                            {id:5,title:"task 5",completed:false},
+                            {id:5,title:"task 6",completed:true}
+                        ]
+                    }
+                   
+                }
+            
+          
+            render(){
+                return(
+                    <div>
+                    <h2>listing tasks {this.state.tasks.length}</h2>
+                    <ul>
+                        {
+                            this.state.tasks.map(function (task) {
+                                if(task.completed == true){
+                                    return <li key={task.id} style={{color:"Green"}}>{task.title}</li>
+                                }else{
+                                    return <li key={task.id} style={{color:"Red"}}>{task.title}</li>
+                                }
+                                
+                                
+                            })
+                            
+                        }
+                    </ul>
+                </div>
+                )
+            }
+            }
+
+            ReactDOM.render(<TasksStrike />,rootHandle)
+
+            </script>
+        </body>
+    </head>
+</html>

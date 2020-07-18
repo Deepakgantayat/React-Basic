@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+            const allUsers = [{id: 1, name: 'deepak', age: 24},
+                                {id:2, name:'kitu', age:24}]
+            const employees = [{id: 1, name: 'rony'},
+                                {id:2, name:'nila'}]
+           
+            function UserDetail(props){
+                return (
+                    <div> 
+                        <h2> Listing {props.type}-{props.users.length}</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th> name </th>
+                                </tr>
+                                </thead>
+                            <tbody>
+                                {
+                                    props.users.map(function(user){
+                                        return(
+                                        <tr key = {user.id}>
+                                            <td> {user.id} </td>
+                                            <td> {user.name} </td>
+                                        </tr>
+                                        )
+                                    })
+                                }
+                                </tbody>
+                                </table>
+                        </div>
+                )}    
+                function App(props){
+                    return(
+                    <div>
+                        <UserDetail users={allUsers} type="users"/>
+                        <UserDetail users={employees} type="employees"/>
+                        <UserDetail users={[{id:1, name:'kanha'}, {id:2, name:'sona'}]} type="student"/>
+                        {/* to comment on JSX*/}
+                        </div>
+                    )
+                }           
+                ReactDOM.render(<App />, rootHandle)
+        </script>
+    </body>
+</html>

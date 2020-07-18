@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+            const links = [
+                {id:1, name:'facebook', url: "http://www.facebook.com"},
+                {id:2, name:'gmail', url: "http://www.gmail.com"},
+                {id:3, name:'google', url: "http://www.google.com"},
+            ]
+            const ele = (
+                <div>
+                <div>
+                    <h2>listing links- {links.length}</h2>
+                    <ul>
+                        {
+                            links.map(function(ele, index){
+                                return <li key = {index}> {ele.url} </li>
+                            })
+                        }
+                    </ul>
+                    </div>
+                    <div>
+                    <ul>
+                        <h3>open sites</h3>
+                        {
+                        links.map(function(ele, index){
+                            return <li key ={index}> {<a href= {ele.url} target="_blank">{ele.name}</a>}</li>
+                        })
+                        }
+                        </ul>
+                        </div>
+                        </div>          
+            )   
+            ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

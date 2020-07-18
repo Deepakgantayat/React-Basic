@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Life Cycle</title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        const rootHandle = document.getElementById('root')
+        class Users extends React.Component{
+            constructor(){
+                super()
+                this.state = {
+                    text: 'users',
+                    click: 0
+                }
+            }
+            //depricated
+            //componentWillMount(){
+            //     console.log('component will mount')
+            // }
+
+            handleClick = () => {
+                console.log('handle click')
+                this.setState((prevState) => {
+                    return {
+                        click: prevState.click + 1
+                    }
+                })
+            }
+            render(){
+                console.log('render',this.state)
+                return(
+                    <div>
+                    <h2> Users {this.state.click}</h2>
+                    <button onClick = {this.handleClick}>click </button>
+                    </div>
+
+                )
+            }
+        }
+        ReactDOM.render(<Users />, rootHandle)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Listing Elements of Array using MAP()</title>
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <script src="./js/react.development.js"></script>
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+            const colors=['Red','Black','Green','Blue']
+            const ele=(
+                <div>
+                <h2><u>Listing colors | No of Qty-{colors.length}</u></h2>
+            
+                    <ul>
+                   {
+                       colors.map(function (e,index) {
+                           let st={backgroundColor:e}
+                           return <li key={index} style={st}>{e}</li>
+                          // return <li key={index}><text style={{bgcolor:'red'}}>{e}</text></li>
+                           
+                       })
+                   }
+                    </ul>
+                       
+                </div>
+            )
+            ReactDOM.render(ele,rootHandle)
+        </script>
+    </body>
+    </html>

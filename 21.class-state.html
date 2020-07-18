@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+            class Person extends React.Component{
+                constructor(){
+                    super()
+                    this.state = {
+                        age: 21
+                    }
+                    this.handleUp = this.handleUp.bind(this)
+                }
+                handleUp(){
+                   //update the state value directly, should not be done, state value changes, but the changed value, is never , is never displayed on the ui
+                   // console.log('btnclicked', this.state.age)
+                   //this.state.age += 1
+                   //console.log(this.state.age)
+                    
+                    this.setState((prevState) =>{
+                        return {
+                            age: prevState.age + 1
+                        }
+                    })
+                }
+                render(){
+                    return(
+                        <div>
+                           <h2>Person Component</h2>
+                           <p>name - {this.props.name}</p>
+                           <p>age - {this.state.age}</p>
+                           <button onClick={this.handleUp}> + </button>
+                           </div>
+                    )
+                }
+            }
+            function App() {
+                return (
+                    <div> 
+                        <Person name="sujith" /> 
+                        <Person name="kitu"/>
+                        </div>
+                )
+            }
+                             
+            ReactDOM.render(<App/>, rootHandle)
+        </script>
+    </body>
+</html>

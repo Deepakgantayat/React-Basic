@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+            const names = [
+                {id:1, name:'kitu', type: "fielder"},
+                {id:2, name:'nila', type: "batsman"},
+                {id:3, name:'rony', type: "bowler"},
+            ]
+            const ele = (
+                
+                <div>
+                    <h2>listing players- {names.length}</h2>
+                    <table border = "3">
+                        <thead>
+                            <tr>
+                                <th> id </th>
+                                <th> name </th>
+                                <th> type </th>
+                                <th> description</th>
+                                </tr>
+                            </thead>
+                        <tbody>
+                        {
+                            names.map(function(ele){
+                               return ( <tr key = {ele.id}> 
+                                     <td> {ele.id} </td>
+                                     <td> {ele.name} </td>
+                                     <td> {ele.type} </td>
+                                     <td>{ele.description}</td>
+                                    </tr>
+                               )
+                            })
+                        }
+                        </tbody>
+                    </table>
+                        </div>
+                        
+                        )                
+            ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

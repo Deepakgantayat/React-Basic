@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <title></title>
+    <head>    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type= "text/babel">
+            const rootHandle = document.getElementById('root')
+            //function component
+            //presentation purpode
+            //-function name must be in caps
+            // -parameter name is props and by default be an object
+            //must return jsx
+            function Greet(props){
+                return (
+                    <h2> welcome {props.name} </h2>
+                )
+            }
+            const ele = (
+            
+                <div>
+                    <Greet name = "john" />
+                    <Greet name = "don" />
+                    {Greet({ name: "donna"}) }         
+                </div>    
+            )                   
+                ReactDOM.render(ele, rootHandle)
+        </script>
+    </body>
+</html>

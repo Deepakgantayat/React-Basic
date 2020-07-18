@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            user details
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            const addresses = [
+                    {id:1,type:"home",landmark:'near hanuman bazar'},
+                    {id:2,type:"work",landmark:'near hospital'}
+                ]
+            function Address(props){
+                return (
+                    <div>
+                        <h2> {props.type.toUpperCase()}</h2>
+                        <p> {props.id}</p>
+                        <p> {props.landmark}</p>
+                        <hr/>
+                    </div>
+                )
+            }
+            const ele = (
+                <div>
+                    <h1>LISTING ADDRESSES {addresses.length}</h1>
+                    <br/>
+                    {
+                        addresses.map(function(address){
+                            return <Address key = {address.id} type= {address.type} 
+                            landmark={address.landmark}/>
+                        })
+                    }
+                </div>
+            )
+
+            ReactDOM.render(ele,rootHandle)
+            </script>
+        </body>
+    </head>
+</html>

@@ -1,0 +1,100 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>User Details Table Delete Confirm</title>
+    </head>
+    <body>
+        <div id="root">
+           
+
+        </div>
+        <script src="./js/react.development.js"></script>
+        <script src="./js/react-dom.development.js"></script>
+        <script src="./js/babel.js"></script>
+
+        <script type="text/babel">
+            const rootHandle=document.getElementById('root')
+
+            class UserDetails extends React.Component{
+                constructor(){
+                    super()
+                    this.state={
+                        users:[
+                            {id:1,name:'Saikat',email:'sunny@gmail.com'},
+                            {id:2,name:'Abhra',email:'abhra@gmail.com'},
+                            {id:3,name:'indrajit',email:'indrajit@gmail.com'}
+                        ]
+                    }
+                }
+
+                handleRemove=(name)=>{
+                    const confirmRemove=window.prompt("Are you Sure?\nEnter The Name")
+                    if(confirmRemove==name)
+                    {
+                            this.setState((prevState)=>{
+                            return{
+                                users:prevState.users.filter(user=>user.name!=name)   
+                            }
+                        })
+                    }
+                    else{
+                        alert("Enter Name Correctly")
+                    }
+                    
+                }
+
+                handleShow=(id,name,email)=>{
+                    // console.log(id)
+                    // console.log(name)
+                    // console.log(email)
+                    return(
+                        alert("ID:"+id+"\n"+"NAME:"+name+"\n"+"EMAIL:"+email)
+                    )
+                }
+
+                render(){
+                    return(
+                        <div>
+                        <h2>Listing Users----{this.state.users.length}</h2>
+                            <table border="1">
+                            <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th colSpan="2">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                this.state.users.map((user)=>{
+                                    return(
+                                        <tr key={user.id}>
+                                        <td>{user.id}</td>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td><button onClick={()=>{
+                                           this.handleShow(user.id,user.name,user.email)
+                                        }}>Show</button></td>
+                                        <td><button onClick={()=>{
+                                            this.handleRemove(user.name)
+                                        }}>Remove</button></td>
+                                        </tr>
+                                    )
+                                    
+                                })
+                            }
+                            </tbody>
+                            </table>
+                        </div>
+                    )
+                }
+            }
+
+            ReactDOM.render(<UserDetails />,rootHandle)
+
+
+        
+        </script>
+    </body>
+    </html>

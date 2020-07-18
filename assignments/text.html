@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            COLOR DISPLAY
+            
+        </title>
+        <body>
+            <div id="root"></div>
+
+            <!-- https://unpkg.com/react@16.10.2/umd/react.development.js -->
+            <script src="./js/react.development.js"></script>
+
+            <!-- https://www.unpkg.com/react-dom@16.10.2/umd/react-dom.development.js -->
+            <script src="./js/react-dom.development.js"></script>
+
+            <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+            <script src="./js/babel.js"></script>
+            <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+            const texts = ['i am the text']
+            function TextDisplay(props){
+                return(
+                    <div>
+                        <h1 > </h1>
+                    <br/>
+                    {
+                       texts.map((text,i) => {
+                           return text
+                       })
+                    }
+                    </div>
+                )
+            }
+            const ele = (
+                <div>
+                    <h1>{this.state.texts} </h1>
+                </div>
+            )
+            ReactDOM.render(<TextDisplay />,rootHandle)
+            </script>
+        </body>
+    </head>
+</html>
